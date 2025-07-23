@@ -521,9 +521,9 @@ const PlayScreen = ({ userId, setScreen, gameMode, debugMode }) => {
                     freshData.playerStates[pid]?.goalTime
                 );
                 
-                // 多人数の場合、最後から2人目がゴールしたら終了
-                const playersToFinish = freshData.players.length === Math.ceil(freshData.players.length - 1);
-                
+                // 4人対戦の場合,ゴールしたプレイヤーが3人になればよい
+                const playersToFinish = 3;
+
                 if (goaledPlayers.length >= playersToFinish) {
                     updates.status = 'finished';
                     
@@ -667,7 +667,7 @@ const PlayScreen = ({ userId, setScreen, gameMode, debugMode }) => {
 
             {/* メインコンテンツ：スタンダードモード */}
             {gameType === 'standard' ? (
-                // スタンダードモード（二人対戦）レイアウト
+                // スタンダードモード（四人対戦）レイアウト
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {/* 左：自分が設定した迷宮 */}
                     <div className="bg-white rounded-lg shadow-md p-4">
@@ -973,7 +973,7 @@ const PlayScreen = ({ userId, setScreen, gameMode, debugMode }) => {
 };
 
 
-//ここから2人モードの処理　内容はそのままなので不整合な可能性あり
+//ここから2人モードの処理　
     if(freshData.players.length==2){
     // スタンダードモード専用：ターン進行の実装
     const advanceStandardTurn = useCallback(async () => {
@@ -1002,8 +1002,8 @@ const PlayScreen = ({ userId, setScreen, gameMode, debugMode }) => {
                 );
                 
                 // 2人プレイの場合、1人がゴールしたら終了
-                const playersToFinish = freshData.players.length === 2 ;
-                
+                const playersToFinish = 1;
+
                 if (goaledPlayers.length >= playersToFinish) {
                     updates.status = 'finished';
                     
